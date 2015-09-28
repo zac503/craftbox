@@ -48,6 +48,10 @@
     padding: 0; }
 }
 
+div.tab-content  {}
+div.tab-content.hide{display:none;}
+
+
 /* For devices larger than 550px */
 @media (min-width: 550px) {
   .container {
@@ -73,8 +77,9 @@
   .eleven.columns                 { width: 91.3333333333%; }
   .twelve.columns                 { width: 100%; margin-left: 0; }
 
-  .one-third.column               { width: 30.6666666667%; }
-  .two-thirds.column              { width: 65.3333333333%; }
+  .one-third.column.border              { width: 30.6666666667%; border: 1px solid #ccc;}
+  .one-third.column.border              { width: 30.6666666667%; border: 1px solid #ccc;}
+  .two-thirds.column.border             { width: 65.3333333333%; border: 1px solid #ccc;}
 
   .one-half.column                { width: 48%; }
 
