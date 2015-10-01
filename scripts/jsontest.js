@@ -3,8 +3,9 @@ $(document).ready(function(){
 
 $.getJSON('test.json', function(data) {
   //obj = $.parseJSON(data);
-  console.log(data);
-});
+  .each(data, function(i,field){
+	$('#json').html(field + "<br>"));
+}});
 
 
 
