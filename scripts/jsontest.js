@@ -1,7 +1,11 @@
 $(document).ready(function(){
 
+var obj;
 $.getJSON('test.json', function(data) {
-  $('#json').html(JSON.stringify(data));
+  obj = $.parseJSON(data);
+  $('#json').html(obj.one);
 });
+
+
 
 });
