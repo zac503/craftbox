@@ -1,8 +1,10 @@
 $(document).ready(function(){
 
+var json;
 
 $.getJSON( "test.json", function( data ) {
   var items = [];
+  json = data;
   $.each( data, function( key, val ) {
     items.push( "<li id='" + key + "'>" + val + "</li>" );
   });
@@ -12,5 +14,7 @@ $.getJSON( "test.json", function( data ) {
     html: items.join( "" )
   }).appendTo( "body" );
 });
+
+alert(json);
 
 });
