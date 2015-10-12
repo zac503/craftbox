@@ -21,6 +21,7 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/skeleton.css">
+  <script src="scripts/jQuery214.js"></script>
   <script type="text/javascript" src="scripts/main.js"></script>
 
   <!-- Favicon
@@ -28,7 +29,7 @@
   <link rel="icon" type="image/png" href="images/favicon.png">
 
 </head>
-<body onload="init()">
+<body >
 
   <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -48,9 +49,8 @@
     <div class="row">
 	
 		<div class="tab-content hide" id="resourcemap">
-			<div class="two-thirds column border">
-			
-				<table width="250">
+			<div class="two-thirds column border" id="locations">
+				<!--<table width="250">
 					<thead colspan="2">Forest Lv1</thead>
 					<tr>
 						<td colspan="2">
@@ -66,11 +66,9 @@
 					<tr>						
 						<td valign="bottom"><Button class="worker">-Worker</Button></td>
 					</tr>					
-				</table>
-			
-			
+				</table>-->			
 			</div>
-			<div class="one-third column border" id="resource-list"></div>
+			<div class="one-third column border" id="resource-list">Current Inventory:</div>
 		</div>
 		
 		<div class="tab-content hide" id="workshop">

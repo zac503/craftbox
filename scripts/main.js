@@ -1,6 +1,6 @@
 
 //Page Handling
-var tabs = new Array;
+var tabs = new Array();
 var menuitems;
 
 //Game Elements
@@ -10,46 +10,127 @@ var workers = 0;
 //Resource Elements
 
 var resourceList = new Array();
-var forestMeter = document.getElementById("forest-meter");
-var forest = {name:"Forest",timer:10,current:0,lvl:1,assignedWorkers:0,running:0,meter:forestMeter};
 var forestDrops = new Array();
 
-var fDrop1 ={name:"Wood"};
+
+var forestMeter = document.getElementById("forest-meter");
+var mineMeter = document.getElementById("mine-meter");
+var forest = {name:"Forest",timer:100,current:0,lvl:1,assignedWorkers:0,running:0,meter:0,drops:[
+	{name:"wood",qty:0},{name:"vine",qty:0},{name:"razor leaf",qty:0}]};
+var mine = {name:"Mine",timer:200,current:0,lvl:1,assignedWorkers:0,running:0,meter:1,drops:[
+	{name:"stone",qty:0},{name:"iron",qty:0},{name:"platinum",qty:0}]};
 
 //Inventory
-var resourceInv = new Array();
+var resourceInv = [];
 
 
-
-function init() {
-	
+$(document).ready(function(){
 	tabs = [document.getElementById("resourcemap"),document.getElementById("workshop"),document.getElementById("shop"),document.getElementById("heroes")];
-	menuitems = document.getElementById("menuitems");
-	
-	resourceList[0] = forest;
-	forestDrops[0] = fDrop1;
-	
-	console.log(forest.running);
+	//menuitems = document.getElementById("menuitems");
+
+	resourceList.push(forest);
+	resourceList.push(mine);
+
+	//write location objects
+
+	$.each(resourceList, function(key, value){
+		//console.log(value.name + " Level " + value.lvl);
+		$("#locations").append("<table width='250'>" +
+		"<thead colspan='2'>" + value.name + " Level " + value.lvl + "</thead>" +
+		"<tr><td colspan='2'><div class='meter'><span id='meter" + value.meter + "' style='width: 0%'></span></div></td></tr>" +
+		"<tr><td rowspan='2' class='harvest'><Button class='harvest' onclick='harvest(" + key + ")'>Harvest</button></td><td valign='top'><Button class='worker'>+Worker</Button></td></tr>" +
+		"<tr><td valign='bottom'><Button class='worker'>-Worker</Button></td></tr></table>");
+		//console.log(key);
+	});
+
+
+	//Menu Item Set
+	$("#menuitems").HTML = "Money:" + money + "</br>" + "Workers:" + workers + "</br>";
+
+
+
+	//Tab Switching Logic
+	for(i = 0; i<tabs.length; i++){
+		if(tabs[i].id == "resourcemap"){
+	   
+	    tabs[i].className = "tab-content";
+		}	
+		else{	   
+			tabs[i].className = "tab-content hide";
+		} 
+	}
+   
+   
+   //Game Loop call
+	var fps = 60;   
+	setInterval(function(){
+		 update();
+	}, 1000/fps);
 
 	
-	//Menu Item Set
-	menuitems.innerHTML = "Money:" + money + "</br>" + "Workers:" + workers + "</br>";
 	
+});
+
+
+//Game Loop Code ---------------------------------------------------------------------------------------------------------------
+function update(){
 	
-	//Tab Switching Logic
-	for(i = 0; i<tabs.length; i++)
-	{
-	   if(tabs[i].id == "resourcemap"){
-		   
-		   tabs[i].className = "tab-content";
-	   }
-	   else{
-		   
-		   tabs[i].className = "tab-content hide";
-	   }   
-	}
-	
-	
+	for(i=0;i<resourceList.length;i++){
+		 
+		 if(resourceList[i].running==1 && resourceList[i].current < resourceList[i].timer)
+		 {
+			resourceList[i].current++;
+			console.log(resourceList[i].current);
+			$("#meter" + resourceList[i].meter).css("width",(((resourceList[i].current/resourceList[i].timer)*100) + "%"));
+			console.log($("#meter" + resourceList[i].meter).css("width"));
+			 
+		 }
+		 if(resourceList[i].running==1 && resourceList[i].current == resourceList[i].timer)
+		 {
+			 
+			 resourceList[i].running = 0;
+			 resourceList[i].current = 0;
+			 console.log("reset " + resourceList[i].name);
+			 $("#meter" + resourceList[i].meter).css("width","0%");
+			 
+			 //isItemInList = findInvItem(resourceList[i].drops[0].name);
+			 itemExists = findInvItemIndex(resourceList[i].drops[0].name);
+			 
+			 
+			 
+			 //console.log(isItemInList);
+			 //console.log(itemInListIndex);
+			 
+			 if (itemExists === undefined || itemExists.length == 0) {
+				resourceInv.push(resourceList[i].drops[0]);
+			 }
+			 else{
+				 
+				 resourceInv[itemExists[0]].qty += 1;
+				 
+			 }
+			 
+			 
+			 console.log(resourceInv[i]);
+			 if(resourceInv[0].qty == null)
+			 {
+				 resourceInv[0].qty = 0;			 
+			 }
+			 //resourceInv[0].qty = resourceInv[0].qty + 1;
+			 console.log(resourceInv[0].name + ": " + resourceInv[0].qty);
+			 
+		 }
+		 
+		
+		 
+		 
+	 }
+	try {
+			updateResourceList();
+		}
+		catch(err) {
+			$("resource-list").html = "Current Inventory";
+		}
 }
 
 function hideTab() {
@@ -74,63 +155,39 @@ function showTab(tabName) {
    }   
  }
  
+function findInvItem(itemName){
+    return $.grep(resourceInv, function(n, i){
+      return n.name == itemName;
+    });
+}
+function findInvItemIndex(name){
+	
+	indexes = $.map(resourceInv, function(obj, index) {
+		if(obj.name == name) {
+			return index;
+		}
+	});
+	
+	return indexes;
+}
+ 
  function harvest(id) {
 	 
 	 resourceList[id].running = 1;
 	 
  }
  
- function updateResourceList() {
-	 
-	 var rBlock = document.getElementById("resource-list");
-	 
-	 for(i=0;i<resourceInv.length; i++)
-	 {
+ function updateResourceList() {	 
+		
+		 $("#resource-list").html("");
+		 "Current Inventory:</br>"+
+		 $.each(resourceInv, function(i, value){
+			  $("#resource-list").append(resourceInv[i].name + ": " + resourceInv[i].qty + "</br>");
+		 });
 		 
-		 rBlock.innerHTML = resourceInv[i].name + ": " + resourceInv[i].qty;
 		 
-	 }
+		 ;
+		 //rBlock.innerHTML = resourceInv[i].name + ": " + resourceInv[i].qty;
+		 
 	 
  }
- 
- 
- 
- 
-//Game Refresh Loop 
- window.setInterval(function(){
-	 
-	 for(i=0;i<resourceList.length;i++){
-		 
-		 if(resourceList[i].running==1 && resourceList[i].current < resourceList[i].timer)
-		 {
-			resourceList[i].current++;
-			console.log(resourceList[i].current);
-			document.getElementById("forest-meter").style.width = ((resourceList[i].current/resourceList[i].timer)*100) + "%";
-			console.log(document.getElementById("forest-meter").style.width);
-			 
-		 }
-		 if(resourceList[i].running==1 && resourceList[i].current == resourceList[i].timer)
-		 {
-			 
-			 resourceList[i].running = 0;
-			 resourceList[i].current = 0;
-			 console.log("reset " + resourceList[i].name);
-			 document.getElementById("forest-meter").style.width = "0%";
-			 console.log("Found " + forestDrops[0].name);
-			 resourceInv.push(forestDrops[0]);
-			 if(resourceInv[0].qty == null)
-			 {
-				 resourceInv[0].qty = 0;
-				 
-			 }
-			 resourceInv[0].qty = resourceInv[0].qty + 1;
-			 console.log(resourceInv[0].qty);
-			 
-		 }
-		 
-		 updateResourceList();
-		 
-	 }
-	 
-
-}, 500);
