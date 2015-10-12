@@ -103,8 +103,10 @@ function update(){
 			 
 			 if (itemExists === undefined || itemExists.length == 0) {
 				resourceInv.push(resourceList[i].drops[0]);
+				resourceInv[resourceInv.length-1].qty +=1;
 			 }
 			 else{
+				 
 				 
 				 resourceInv[itemExists[0]].qty += 1;
 				 
