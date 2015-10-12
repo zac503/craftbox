@@ -180,7 +180,7 @@ function findInvItemIndex(name){
  function updateResourceList() {	 
 		
 		 $("#resource-list").html("");
-		 "Current Inventory:</br>"+
+		 $("#resource-list").append("Current Inventory:</br>");
 		 $.each(resourceInv, function(i, value){
 			  $("#resource-list").append(resourceInv[i].name + ": " + resourceInv[i].qty + "</br>");
 		 });
