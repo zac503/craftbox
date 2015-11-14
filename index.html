@@ -41,35 +41,32 @@
 	
 	<div class="row">
 		<input type="button" value="Resource Map" onclick="showTab('resourcemap')" />
+		<input type="button" value="Town" onclick="showTab('town')" />
 		<input type="button" value="Workshop" onclick="showTab('workshop')"  />
 		<input type="button" value="Shop" onclick="showTab('shop')"   />
 		<input type="button" value="Hero's Tavern"  onclick="showTab('heroes')"  />
+	</div>
+	
+	<div class="row">
+		<div class="two-thirds column border" id="infobox"></div>
+	</div>
+	
+	<!--spacer-->
+	<div class="row">
+	<br>
 	</div>
   
     <div class="row">
 	
 		<div class="tab-content hide" id="resourcemap">
-			<div class="two-thirds column border" id="locations">
-				<!--<table width="250">
-					<thead colspan="2">Forest Lv1</thead>
-					<tr>
-						<td colspan="2">
-							<div class="meter">
-							<span id="forest-meter" style="width: 0%"></span>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td rowspan="2" class="harvest"><Button class="harvest" onclick="harvest(0)">Harvest</button></td>
-						<td valign="top"><Button class="worker">+Worker</Button></td>
-					</tr>
-					<tr>						
-						<td valign="bottom"><Button class="worker">-Worker</Button></td>
-					</tr>					
-				</table>-->			
-			</div>
+			<div class="two-thirds column border" id="locations"></div>
 			<div class="one-third column border" id="resource-list">Current Inventory:</div>
 		</div>
+		
+		<div class="tab-content hide" id="town">
+			<div class="two-thirds column border">Town</div>
+			<div class="one-third column border"></div>
+		</div>		
 		
 		<div class="tab-content hide" id="workshop">
 			<div class="two-thirds column border">Workshop</div>

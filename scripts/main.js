@@ -19,13 +19,14 @@ var forest = {name:"Forest",timer:100,current:0,lvl:1,assignedWorkers:0,running:
 	{name:"wood",qty:0},{name:"vine",qty:0},{name:"razor leaf",qty:0}]};
 var mine = {name:"Mine",timer:200,current:0,lvl:1,assignedWorkers:0,running:0,meter:1,drops:[
 	{name:"stone",qty:0},{name:"iron",qty:0},{name:"platinum",qty:0}]};
-
+var messages = ["Using your hands, collect whatever resources you can grab","You awake in the middle of town. Damp and covered with dirt, you look around to see the remnants of a great fire."];
 //Inventory
 var resourceInv = [];
 
 
 $(document).ready(function(){
-	tabs = [document.getElementById("resourcemap"),document.getElementById("workshop"),document.getElementById("shop"),document.getElementById("heroes")];
+	//Tab Collection, FORGET TO ADD IT HERE OR IT WON'T SHOW UP
+	tabs = [document.getElementById("resourcemap"),document.getElementById("town"),document.getElementById("workshop"),document.getElementById("shop"),document.getElementById("heroes")];
 	//menuitems = document.getElementById("menuitems");
 
 	resourceList.push(forest);
@@ -51,9 +52,9 @@ $(document).ready(function(){
 
 	//Tab Switching Logic
 	for(i = 0; i<tabs.length; i++){
-		if(tabs[i].id == "resourcemap"){
-	   
-	    tabs[i].className = "tab-content";
+		if(tabs[i].id == "town"){	   
+			tabs[i].className = "tab-content";
+			$("#infobox").html(messages[i]);
 		}	
 		else{	   
 			tabs[i].className = "tab-content hide";
@@ -149,6 +150,7 @@ function showTab(tabName) {
 	   if(tabs[i].id == tabName){
 		   
 		   tabs[i].className = "tab-content";
+		   $("#infobox").html(messages[i]);
 	   }
 	   else{
 		   
