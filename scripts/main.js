@@ -27,10 +27,11 @@ var resourceInv = [];
 $(document).ready(function(){
 	//Tab Collection, FORGET TO ADD IT HERE OR IT WON'T SHOW UP
 	tabs = [document.getElementById("resourcemap"),document.getElementById("town"),document.getElementById("workshop"),document.getElementById("shop"),document.getElementById("heroes")];
+	buttons =[$("#resource_button")[0],$("#town_button")[0],$("#workshop_button")[0],$("#shop_button")[0],$("#tavern_button")[0]];
 	//menuitems = document.getElementById("menuitems");
 
 	resourceList.push(forest);
-	resourceList.push(mine);
+	//resourceList.push(mine);
 
 	//write location objects
 
@@ -55,11 +56,19 @@ $(document).ready(function(){
 		if(tabs[i].id == "town"){	   
 			tabs[i].className = "tab-content";
 			$("#infobox").html(messages[i]);
+			buttons[i].className ="button-primary";
 		}	
 		else{	   
 			tabs[i].className = "tab-content hide";
 		} 
 	}
+	
+	//Hide things
+	
+	$("#workshop_button").toggle();
+	$("#shop_button").toggle();
+	$("#tavern_button").toggle();
+	
    
    
    //Game Loop call
@@ -151,10 +160,12 @@ function showTab(tabName) {
 		   
 		   tabs[i].className = "tab-content";
 		   $("#infobox").html(messages[i]);
+		   buttons[i].className = "button-primary";
 	   }
 	   else{
 		   
 		   tabs[i].className = "tab-content hide";
+		   buttons[i].className = "button";
 	   }   
    }   
  }

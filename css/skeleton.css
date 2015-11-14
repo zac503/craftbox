@@ -250,8 +250,8 @@ input[type="submit"].button-primary,
 input[type="reset"].button-primary,
 input[type="button"].button-primary {
   color: #FFF;
-  background-color: #33C3F0;
-  border-color: #33C3F0; }
+  background-color: #666666;
+  border-color: #333333; }
 .button.button-primary:hover,
 button.button-primary:hover,
 input[type="submit"].button-primary:hover,
@@ -263,10 +263,11 @@ input[type="submit"].button-primary:focus,
 input[type="reset"].button-primary:focus,
 input[type="button"].button-primary:focus {
   color: #FFF;
-  background-color: #1EAEDB;
-  border-color: #1EAEDB; }
+  background-color: #888888;
+  border-color: #666666; }
 button.harvest {height:64px; margin:0px;}
-button.worker {height:30px; margin:0px; line-height:20px; width:125px;}  
+button.worker {height:30px; margin:0px; line-height:20px; width:125px;}
+
 
 
 

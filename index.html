@@ -40,11 +40,11 @@
 	</div>
 	
 	<div class="row">
-		<input type="button" value="Resource Map" onclick="showTab('resourcemap')" />
-		<input type="button" value="Town" onclick="showTab('town')" />
-		<input type="button" value="Workshop" onclick="showTab('workshop')"  />
-		<input type="button" value="Shop" onclick="showTab('shop')"   />
-		<input type="button" value="Hero's Tavern"  onclick="showTab('heroes')"  />
+		<input type="button" class="button" id="resource_button" value="Resource Map" onclick="showTab('resourcemap')" />
+		<input type="button" class="button" id="town_button" value="Town" onclick="showTab('town')" />
+		<input type="button" class="button" id="workshop_button" value="Workshop" onclick="showTab('workshop')"  />
+		<input type="button" class="button" id="shop_button" value="Shop" onclick="showTab('shop')"   />
+		<input type="button" class="button" id="tavern_button" value="Hero's Tavern"  onclick="showTab('heroes')"  />
 	</div>
 	
 	<div class="row">
@@ -64,8 +64,8 @@
 		</div>
 		
 		<div class="tab-content hide" id="town">
-			<div class="two-thirds column border">Town</div>
-			<div class="one-third column border"></div>
+			<div class="two-thirds column border"></div>
+			<div class="one-third column border" id="resource-list">Current Inventory:</div>
 		</div>		
 		
 		<div class="tab-content hide" id="workshop">
