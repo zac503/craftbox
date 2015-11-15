@@ -19,7 +19,20 @@ var forest = {name:"Forest",timer:100,current:0,lvl:1,assignedWorkers:0,running:
 	{name:"wood",qty:0},{name:"vine",qty:0},{name:"razor leaf",qty:0}]};
 var mine = {name:"Mine",timer:200,current:0,lvl:1,assignedWorkers:0,running:0,meter:1,drops:[
 	{name:"stone",qty:0},{name:"iron",qty:0},{name:"platinum",qty:0}]};
-var messages = ["Using your hands, collect whatever resources you can grab","You awake in the middle of town. Damp and covered with dirt, you look around to see the remnants of a great fire."];
+	
+//infobox messages	
+//var messages = ["Using your hands, collect whatever resources you can grab","You awake in the middle of town. Damp and covered with dirt, you look around to see the remnants of a great fire."];
+
+var resourceMessageState = 0;
+var townMessageState = 0;
+var workshopMessageState = 0;
+var shopMessageState = 0;
+var tavernMessageState = 0;
+
+
+
+var activeTab = 1;
+
 //Inventory
 var resourceInv = [];
 
@@ -52,23 +65,29 @@ $(document).ready(function(){
 
 
 	//Tab Switching Logic
-	for(i = 0; i<tabs.length; i++){
+	/*for(i = 0; i<tabs.length; i++){
 		if(tabs[i].id == "town"){	   
 			tabs[i].className = "tab-content";
-			$("#infobox").html(messages[i]);
+		$("#infobox").html(messages[i]);
 			buttons[i].className ="button-primary";
 		}	
 		else{	   
 			tabs[i].className = "tab-content hide";
 		} 
-	}
+	}*/
 	
 	//Hide things
 	
+	$("#resource_button").toggle();
+	$("#town_button").toggle();
 	$("#workshop_button").toggle();
 	$("#shop_button").toggle();
 	$("#tavern_button").toggle();
 	
+	
+	showTab('town');
+   //test external load
+   $("#infobox").html(messages[1][0]);
    
    
    //Game Loop call
@@ -85,6 +104,7 @@ $(document).ready(function(){
 //Game Loop Code ---------------------------------------------------------------------------------------------------------------
 function update(){
 	
+	//Resource Collection
 	for(i=0;i<resourceList.length;i++){
 		 
 		 if(resourceList[i].running==1 && resourceList[i].current < resourceList[i].timer)
@@ -143,6 +163,11 @@ function update(){
 		catch(err) {
 			$("resource-list").html = "Current Inventory";
 		}
+		
+	//Message Box Updating
+	setInfoBox(activeTab);
+		
+		
 }
 
 function hideTab() {
@@ -158,6 +183,7 @@ function showTab(tabName) {
    {
 	   if(tabs[i].id == tabName){
 		   
+		   activeTab = i;
 		   tabs[i].className = "tab-content";
 		   $("#infobox").html(messages[i]);
 		   buttons[i].className = "button-primary";
@@ -168,6 +194,28 @@ function showTab(tabName) {
 		   buttons[i].className = "button";
 	   }   
    }   
+ }
+ 
+ function setInfoBox (tabID) {
+	 	 
+	switch(tabID){
+		case 0:
+			$("#infobox").html(messages[activeTab][resourceMessageState]);
+			break;
+		case 1:
+			$("#infobox").html(messages[activeTab][townMessageState]);
+			break;		
+		case 2:
+			$("#infobox").html(messages[activeTab][workshopMessageState]);
+			break;
+		case 3:
+			$("#infobox").html(messages[activeTab][shopMessageState]);
+			break;
+		case 4:
+			$("#infobox").html(messages[activeTab][tavernMessageState]);
+			break;
+	}
+	 
  }
  
 function findInvItem(itemName){
@@ -206,3 +254,33 @@ function findInvItemIndex(name){
 		 
 	 
  }
+ 
+ /*-----------------------------------Upgrade Processing--------------------------------------------------------------*/
+ 
+function townUpgrade(upgradeCode){
+	 console.log(upgradeCode);
+	 upgradeID = parseInt(upgradeCode);
+		switch (upgradeID) {		 
+			case 0:
+				$("#TownUpgrade1").toggle();
+				townMessageState = 1;
+				$("#TownUpgrade2").toggle();
+				break;
+			case 1:
+				$("#TownUpgrade2").toggle();
+				townMessageState = 2;
+				$("#TownUpgrade3").toggle();
+				break;
+			case 2:
+				$("#TownUpgrade3").toggle();
+				townMessageState = 2;
+				$("#resource_button").toggle();
+				$("#town_button").toggle();
+				showTab("resourcemap");
+				//$("#TownUpgrade3").toggle();
+				break;
+		}	 
+		 
+	}
+	 
+

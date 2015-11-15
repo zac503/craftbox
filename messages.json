@@ -1,0 +1,12 @@
+
+var townMessages="
+{"Messages": {
+  "town": {
+    "text": [
+      {"value": "You awake in the middle of town. Damp and covered with dirt, you look around to see the remnants of a great fire."},
+      {"value": "You awake in the middle of town. Damp and covered with dirt, you look around to see the remnants of a great fire."},
+      {"value": "You awake in the middle of town. Damp and covered with dirt, you look around to see the remnants of a great fire."}
+    ]
+  }
+}}
+"

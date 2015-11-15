@@ -267,7 +267,7 @@ input[type="button"].button-primary:focus {
   border-color: #666666; }
 button.harvest {height:64px; margin:0px;}
 button.worker {height:30px; margin:0px; line-height:20px; width:125px;}
-
+.button.hide{display:none;}
 
 
 

@@ -22,6 +22,7 @@
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/skeleton.css">
   <script src="scripts/jQuery214.js"></script>
+  <script src="scripts/progression.js"></script>
   <script type="text/javascript" src="scripts/main.js"></script>
 
   <!-- Favicon
@@ -59,30 +60,30 @@
     <div class="row">
 	
 		<div class="tab-content hide" id="resourcemap">
-			<div class="two-thirds column border" id="locations"></div>
-			<div class="one-third column border" id="resource-list">Current Inventory:</div>
+			<div class="two-thirds column border" id="locations"></div>			
 		</div>
 		
 		<div class="tab-content hide" id="town">
-			<div class="two-thirds column border"></div>
-			<div class="one-third column border" id="resource-list">Current Inventory:</div>
+			<div class="two-thirds column border">
+				<input type="button" class="button" id="TownUpgrade1" value="Look Around" onClick="townUpgrade('0')" />	
+				<input type="button" class="button hide" id="TownUpgrade2" value="Search for supplies" onClick="townUpgrade('1')" />						
+				<input type="button" class="button hide" id="TownUpgrade3" value="Head to the Forest" onClick="townUpgrade('2')" />		
+			</div>			
 		</div>		
 		
 		<div class="tab-content hide" id="workshop">
-			<div class="two-thirds column border">Workshop</div>
-			<div class="one-third column border">{{resources.name}}</div>
+			<div class="two-thirds column border">Workshop</div>			
 		</div>
 		
 		<div class="tab-content hide" id="shop">
-			<div class="two-thirds column border">Shop</div>
-			<div class="one-third column border">2/3</div>
+			<div class="two-thirds column border">Shop</div>		
 		</div>
 		
 		<div class="tab-content hide" id="heroes">
-			<div class="two-thirds column border">Hero's Tavern</div>
-			<div class="one-third column border">2/3</div>
+			<div class="two-thirds column border">Hero's Tavern</div>			
 		</div>
 		
+		<div class="one-third column border" id="resource-list">Current Inventory:</div>
 		
     </div>
   </div>
